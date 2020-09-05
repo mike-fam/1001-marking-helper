@@ -49,7 +49,7 @@ The purpose of this tool is to setup a convenient environment for your marking s
 
      ![Static Analysis screenshot](https://i.imgur.com/0n0fiEK.png)
 
-5. After you've done marking the assignment, close your editor. The tool will prompt for another student id.
+5. After you've done marking the assignment, close your editor. The tool will prompt for another student id. Enter a blank line to close the tool.
 
 *Note:* I've tried to make this cross platform, but I use this mostly on Windows and tested it on MacOS, so there might be some issues with other OSes.
 
