@@ -18,11 +18,11 @@ def main():
 ##        submissions_path = Path(args.submissions_path) / 'Assignment 3' / student_id
 ##        last_submission = sorted(list(submissions_path.iterdir()))[-1] / 'files'
         submission_path = Path(args.submissions_path) / student_id
-        a1 = submission_path / 'a1.py'
+        a2 = submission_path / 'a2.py'
         # player = last_submission / 'player.py'
         
-        if not a1.exists():
-            input("Warning: a1.py does not exist."
+        if not a2.exists():
+            input("Warning: a2.py does not exist."
                   " Please go check")
             continue
 ##        if not player.exists():
@@ -32,7 +32,7 @@ def main():
         support_code_path = Path(args.assignment_stub)
         # open and run assignments
         open_script = OpenScript(student_id, submission_path, support_code_path,
-                                 args.ide, "a1.py",
+                                 args.ide, "a2.py",
                                  keep_temp=True)  # Change this if you dont want to keep your marking folders
         opening = threading.Thread(target=open_script.open_scripts, daemon=True)
         opening.start()
@@ -41,11 +41,11 @@ def main():
         
         marking_path = open_script.get_marking_folder()
         # Test stuffs
-        with open(marking_path / 'a1.py', encoding='utf-8') as a1_in:
-            inspect = InspectFile(a1_in)
+        with open(marking_path / 'a2.py', encoding='utf-8') as a2_in:
+            inspect = InspectFile(a2_in)
             inspect.test_line_length()
             inspect.test_naming()
-##            inspect.test_encapsulation()
+            inspect.test_encapsulation()
         print(("#" * LINE_LENGTH_LIMIT + '\n') * 2)
         
         opening.join()
