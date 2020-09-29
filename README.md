@@ -8,7 +8,7 @@ The purpose of this tool is to setup a convenient environment for your marking s
 
 1. You must have Python 3.8 in order for this to work. 
 
-2. Copy this directory to your own marking folder, do not mark your assignments directly in this repo.
+2. ~~Copy this directory to your own marking folder, do not mark your assignments directly in this repo.~~
 
 3. Download the assignments from Blackboard and extract them to `submissions/`. ONLY download the latest version of the submissions and not all of them. The tool MIGHT open an older version of the submission if you have multiple versions. This hasn't been tested yet.
 
