@@ -6,50 +6,43 @@ from open_scripts import OpenScript
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Open student's scritps and run them")
+    parser = argparse.ArgumentParser(description="Open student's scripts and run them")
     parser.add_argument('ide')
-    parser.add_argument('submissions_path')
-    parser.add_argument('assignment_stub')
     args = parser.parse_args()
     while True:
         student_id = input("Please input the student's id: ")
         if not student_id:
             break
-##        submissions_path = Path(args.submissions_path) / 'Assignment 3' / student_id
-##        last_submission = sorted(list(submissions_path.iterdir()))[-1] / 'files'
-        submission_path = Path(args.submissions_path) / student_id
-        a2 = submission_path / 'a2.py'
-        # player = last_submission / 'player.py'
-        
-        if not a2.exists():
-            input("Warning: a2.py does not exist."
+
+        submission_path = Path('normalised_submissions') / student_id
+        a3 = submission_path / 'a3.py'
+
+        if not a3.exists():
+            input("Warning: a3.py does not exist."
                   " Please go check")
             continue
-##        if not player.exists():
-##            input("Warning: player.py does not exist. player.py from the assignment stub will be "
-##                  "used.[Press Enter to continue]")
         
-        support_code_path = Path(args.assignment_stub)
+        support_code_path = Path('assignment_stub')
         # open and run assignments
         open_script = OpenScript(student_id, submission_path, support_code_path,
-                                 args.ide, "a2.py",
+                                 args.ide, "a3.py",
                                  keep_temp=True)  # Change this if you dont want to keep your marking folders
         opening = threading.Thread(target=open_script.open_scripts, daemon=True)
         opening.start()
-        #running = threading.Thread(target=open_script.run_script, daemon=True)
-        #running.start()
+        running = threading.Thread(target=open_script.run_script, daemon=True)
+        running.start()
         
         marking_path = open_script.get_marking_folder()
         # Test stuffs
-        with open(marking_path / 'a2.py', encoding='utf-8') as a2_in:
-            inspect = InspectFile(a2_in)
+        with open(marking_path / 'a3.py', encoding='utf-8') as a3_in:
+            inspect = InspectFile(a3_in)
             inspect.test_line_length()
             inspect.test_naming()
             inspect.test_encapsulation()
         print(("#" * LINE_LENGTH_LIMIT + '\n') * 2)
         
         opening.join()
-        #running.join()
+        running.join()
         
 
 if __name__ == '__main__':
