@@ -53,7 +53,7 @@ class OpenScript:
         
     def run_script(self):
         subprocess.call([sys.executable, self._new_dir.resolve() / self._to_run],
-                        cwd=self._new_dir.resolve(), stderr=subprocess.DEVNULL)
+                        cwd=self._new_dir.resolve())
         
     def get_marking_folder(self):
         return self._new_dir
