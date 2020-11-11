@@ -8,13 +8,11 @@ The purpose of this tool is to setup a convenient environment for your marking s
 
 1. You must have Python 3.8 in order for this to work. 
 
-2. ~~Copy this directory to your own marking folder, do not mark your assignments directly in this repo.~~
+2. ~~Copy this directory to your own marking folder, do not mark your assignments directly in this repo.~~ **You can now mark directly in this repo. Everything downloaded/generated for marking will be ignored :)**
 
 3. Download the assignments from Blackboard and extract them to `submissions/`. ONLY download the latest version of the submissions and not all of them. The tool MIGHT open an older version of the submission if you have multiple versions. This hasn't been tested yet.
 
-4. ~~Copy the supported files to the `assignment_stub` folder. The supported files can be the supported code (e.g. `a3_support.py`), the test files and the text files containing all the words.~~
-
-5. Run `normalise_files.py`. This will create a directory called `normalised_submissions`. The structure of this folder is:
+4. Run `normalise_files.py`. This will create a directory called `normalised_submissions`. The structure of this folder is:
    ```
    normalised_submissions
    ├── s0000001
