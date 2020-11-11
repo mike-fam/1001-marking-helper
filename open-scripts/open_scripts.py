@@ -54,6 +54,10 @@ class OpenScript:
     def run_script(self):
         subprocess.call([sys.executable, self._new_dir.resolve() / self._to_run],
                         cwd=self._new_dir.resolve())
+
+    def open_scripts_in_idle(self):
+        subprocess.call([sys.executable, "-m", "idlelib", self._new_dir.resolve() / self._to_run],
+                        cwd=self._new_dir.resolve())
         
     def get_marking_folder(self):
         return self._new_dir

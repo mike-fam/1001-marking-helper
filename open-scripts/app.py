@@ -29,6 +29,8 @@ def main():
                                  keep_temp=True)  # Change this if you dont want to keep your marking folders
         opening = threading.Thread(target=open_script.open_scripts, daemon=True)
         opening.start()
+        opening_idle = threading.Thread(target=open_script.open_scripts_in_idle, daemon=True)
+        opening_idle.start()
         running = threading.Thread(target=open_script.run_script, daemon=True)
         running.start()
         
@@ -42,6 +44,7 @@ def main():
         print(("#" * LINE_LENGTH_LIMIT + '\n') * 2)
         
         opening.join()
+        opening_idle.join()
         running.join()
         
 

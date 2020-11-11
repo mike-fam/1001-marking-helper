@@ -51,7 +51,9 @@ The purpose of this tool is to setup a convenient environment for your marking s
 
 5. **The assignment is also run (the script runs `python a3.py`). You can also see the errors printed out in stderr**
 
-6. After you've done marking the assignment, close your editor. The tool will prompt for another student id. Enter a blank line to close the tool.
+6. **The assignment is also opened in IDLE. This is helpful if you want to change the student's code (e.g. running a different game or task) and rerun it.**
+
+7. After you've done marking the assignment, close everything, including your editor, the gui and idle. The tool will prompt for another student id. Enter a blank line to close the tool.
 
 *Note:* I've tried to make this cross platform, but I use this mostly on Windows and tested it on MacOS, so there might be some issues with other OSes.
 
