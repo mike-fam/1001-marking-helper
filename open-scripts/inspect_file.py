@@ -32,7 +32,7 @@ def inspect_method(inspection_name):
 class InspectFile:
     PRIVATE_OUTSIDE_PATTERN = re.compile(r'\b((?!self)\w)+\._[^_](\w+?)\b')
     PUBLIC_INSIDE_PATTERN = re.compile(r'(self\.[^_]\w*)\s*=')
-    CAMEL_CASE = re.compile(r'(?!["\']).*\b(self\._?)?[a-z]+(([A-Z][0-9a-z]+)+)\b(?!["\'])')
+    CAMEL_CASE = re.compile(r'(?!["\'])\b(self\._?)?[a-z]+(([A-Z][0-9a-z]+)+)\b(?!["\'])')
     BAD_FOR_NAME = re.compile(r'for\s+[a-zA-Z]\s+in\s+((?!range).)+\s*:')
     BAD_NAME = re.compile(r'^\s*\b((((?![xy])[a-z]){1,2}\s*,\s*)*((?![xy])[a-z]){1,2})\b\s*=')
     
