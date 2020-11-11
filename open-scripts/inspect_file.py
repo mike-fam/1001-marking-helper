@@ -1,8 +1,7 @@
 from __future__ import annotations
 
-import importlib.util
 from os import path
-from typing import List, TextIO
+from typing import TextIO
 import re
 
 
@@ -33,7 +32,7 @@ def inspect_method(inspection_name):
 class InspectFile:
     PRIVATE_OUTSIDE_PATTERN = re.compile(r'\b((?!self)\w)+\._[^_](\w+?)\b')
     PUBLIC_INSIDE_PATTERN = re.compile(r'(self\.[^_]\w*)\s*=')
-    CAMEL_CASE = re.compile(r'\b(self\._?)?[a-z]+(([A-Z][0-9a-z]+)+)\b')
+    CAMEL_CASE = re.compile(r'(?!["\']).*\b(self\._?)?[a-z]+(([A-Z][0-9a-z]+)+)\b(?!["\'])')
     BAD_FOR_NAME = re.compile(r'for\s+[a-zA-Z]\s+in\s+((?!range).)+\s*:')
     BAD_NAME = re.compile(r'^\s*\b((((?![xy])[a-z]){1,2}\s*,\s*)*((?![xy])[a-z]){1,2})\b\s*=')
     
@@ -74,9 +73,9 @@ class InspectFile:
     @staticmethod
     def _test_line_length(lines, content, indent=0):
         okay = True
-        for line_num, line in enumerate(lines):
+        for line_num, line in enumerate(lines, start=1):
             if len(line) > LINE_LENGTH_LIMIT:
-                print2(f"Line {line_num + 1} has {len(line)} characters.", indent=indent)
+                print2(f"Line {line_num} has {len(line)} characters.", indent=indent)
                 print2(f"{line.strip()}", indent=indent + 1)
                 okay = False
         return okay
@@ -84,7 +83,7 @@ class InspectFile:
     @classmethod
     def _test_encapsulation(cls, lines, content, indent=0):
         okay = True
-        for line_num, line in enumerate(lines):
+        for line_num, line in enumerate(lines, start=1):
             private_outside = cls.PRIVATE_OUTSIDE_PATTERN.finditer(line)
             public_inside = cls.PUBLIC_INSIDE_PATTERN.finditer(line)
             for match in private_outside:
@@ -100,7 +99,7 @@ class InspectFile:
     @classmethod
     def _test_naming(cls, lines, content, indent=0):
         okay = True
-        for line_num, line in enumerate(lines):
+        for line_num, line in enumerate(lines, start=1):
             camel_case = cls.CAMEL_CASE.finditer(line)
             for match in camel_case:
                 print2(f"camelCase: {match.group(0)}, line {line_num}", indent=indent)
