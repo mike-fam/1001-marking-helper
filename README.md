@@ -25,7 +25,7 @@ The purpose of this tool is to setup a convenient environment for your marking s
    Where `sXXXXXXX` denotes the student IDs.
 
 ## Usage 
-1. In your making directory, run `python ./open-scripts/app.py <ide>`, where `<ide>` is your editor of choice (e.g. `code` for VS Code, `subl` for Sublime Text, etc.). You can even set it up with PyCharm and other editors, but you'll have to go through the code and change the flags to match the configuration of your editor.
+1. In your making directory, run `python ./open-scripts/app.py <ide>` <mark>(no more submission path and assignment stubs)</mark>, where `<ide>` is your editor of choice (e.g. `code` for VS Code, `subl` for Sublime Text, etc.). You can even set it up with PyCharm and other editors, but you'll have to go through the code and change the flags to match the configuration of your editor.
 * **Note:** you have to use Python 3.8 for this command. On Windows, if you don't have Python 3.8 setup in your Path environment variable, you can replace `python` with `py -3.8`. On Unix-like systems, you can replace `python` with typically something like `python3.8`.
 2. You'll be prompted for a student id. Enter the id of the student you want to mark. 
   * If their `a3.py` is not found, it's likely that they submitted a zip file. In this case you'll have to manually set it up.
@@ -49,7 +49,9 @@ The purpose of this tool is to setup a convenient environment for your marking s
 
      ![Static Analysis screenshot](https://i.imgur.com/0n0fiEK.png)
 
-5. After you've done marking the assignment, close your editor. The tool will prompt for another student id. Enter a blank line to close the tool.
+5. <mark>The assignment is also run (the script runs `python a3.py`). You can also see the errors printed out in stderr</mark>
+
+6. After you've done marking the assignment, close your editor. The tool will prompt for another student id. Enter a blank line to close the tool.
 
 *Note:* I've tried to make this cross platform, but I use this mostly on Windows and tested it on MacOS, so there might be some issues with other OSes.
 
