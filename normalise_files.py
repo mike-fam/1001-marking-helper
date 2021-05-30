@@ -1,12 +1,12 @@
 from pathlib import Path
 import shutil
 
-NORMALISED_SUNMISSIONS_DIR = Path('normalised_submissions')
+NORMALISED_SUBMISSIONS_DIR = Path('normalised_submissions')
 
 py_files = list(Path().glob(r'submissions/*.py'))
 
-if not NORMALISED_SUNMISSIONS_DIR.exists():
-    NORMALISED_SUNMISSIONS_DIR.mkdir()
+if not NORMALISED_SUBMISSIONS_DIR.exists():
+    NORMALISED_SUBMISSIONS_DIR.mkdir()
 
 for file in py_files:
     _, sid, _, _, file_name = file.name.split('_', maxsplit=4)

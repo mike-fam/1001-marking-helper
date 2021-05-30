@@ -1,8 +1,12 @@
 from pathlib import Path
 import threading
 import argparse
-from inspect_file import InspectFile, LINE_LENGTH_LIMIT
-from open_scripts import OpenScript
+from helpers.inspect_file import InspectFile, LINE_LENGTH_LIMIT
+from helpers.open_scripts import OpenScript
+
+
+SUBMISSION_DIR = Path("submissions")
+SUPPORT_CODE_PATH = Path('assignment_stub')
 
 
 def main():
@@ -10,11 +14,11 @@ def main():
     parser.add_argument('ide')
     args = parser.parse_args()
     while True:
-        student_id = input("Please input the student's id: ")
-        if not student_id:
+        submission_id = input("Please input the submission's id: ")
+        if not submission_id:
             break
 
-        submission_path = Path('normalised_submissions') / student_id
+        submission_path = SUBMISSION_DIR / f"submission_{submission_id}"
         a3 = submission_path / 'a3.py'
 
         if not a3.exists():
@@ -22,14 +26,20 @@ def main():
                   " Please go check")
             continue
         
-        support_code_path = Path('assignment_stub')
         # open and run assignments
-        open_script = OpenScript(student_id, submission_path, support_code_path,
-                                 args.ide, "a3.py",
-                                 keep_temp=True)  # Change this if you dont want to keep your marking folders
+        # Change keep_temp if you dont want to keep your marking folders
+        open_script = OpenScript(submission_id, submission_path,
+                                 SUPPORT_CODE_PATH,
+                                 args.ide,
+                                 "a3.py",
+                                 "task1.py",
+                                 "task2.py",
+                                 "csse7030.py",
+                                 keep_temp=False)
         opening = threading.Thread(target=open_script.open_scripts, daemon=True)
         opening.start()
-        opening_idle = threading.Thread(target=open_script.open_scripts_in_idle, daemon=True)
+        opening_idle = threading.Thread(target=open_script.open_scripts_in_idle,
+                                        daemon=True)
         opening_idle.start()
         running = threading.Thread(target=open_script.run_script, daemon=True)
         running.start()

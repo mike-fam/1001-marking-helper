@@ -9,7 +9,7 @@ import subprocess
 SHELL = platform.system() == 'Windows'
 
 
-def open_file(path):
+def open_dir(path):
     if platform.system() == "Windows":
         os.startfile(path)
     elif platform.system() == "Darwin":
@@ -17,10 +17,12 @@ def open_file(path):
     elif platform.system() == "Linux":
         subprocess.call(["gnome-terminal", f"--working-directory={path}"])
 
+
 class OpenScript:
     TEMP_FOLDER = "temp_{sid}"
     
-    def __init__(self, sid, submission_path, support_code, ide, *args, keep_temp=False):
+    def __init__(self, sid, submission_path, support_code, ide, *args,
+                 keep_temp=False):
         self._sid = sid
         self._submission_path = submission_path
         self._support_code_path = support_code
@@ -47,8 +49,16 @@ class OpenScript:
         shutil.copytree(self._submission_path, self._new_dir, dirs_exist_ok=True)
     
     def open_scripts(self):
-        open_file(self._new_dir.resolve())
-        subprocess.call([self._ide, '-n', '-w'] + [self._new_dir.resolve() / to_open for to_open in self._to_open],
+        open_dir(self._new_dir.resolve())
+        to_opens = []
+        for to_open in self._to_open:
+            if not (self._new_dir.resolve() / to_open).exists():
+                print(f"{to_open} does not exist")
+                continue
+            to_opens.append(to_open)
+        subprocess.call([self._ide, '-n', '-w'] +
+                        [self._new_dir.resolve() / to_open for
+                         to_open in to_opens],
                         shell=SHELL)
         
     def run_script(self):
@@ -56,7 +66,10 @@ class OpenScript:
                         cwd=self._new_dir.resolve())
 
     def open_scripts_in_idle(self):
-        subprocess.call([sys.executable, "-m", "idlelib", self._new_dir.resolve() / self._to_run],
+        subprocess.call([sys.executable,
+                         "-m",
+                         "idlelib",
+                         self._new_dir.resolve() / self._to_run],
                         cwd=self._new_dir.resolve())
         
     def get_marking_folder(self):
