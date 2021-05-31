@@ -65,8 +65,8 @@ def main():
         opening_idle.start()
         running = threading.Thread(target=open_script.run_script, daemon=True)
         running.start()
-
-        opening.join()
+        if args.ide:
+            opening.join()
         opening_idle.join()
         running.join()
         
