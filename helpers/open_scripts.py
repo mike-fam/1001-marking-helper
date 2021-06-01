@@ -53,9 +53,14 @@ class OpenScript:
         to_opens = []
         for to_open in self._to_open:
             if not (self._new_dir.resolve() / to_open).exists():
-                print(f"{to_open} does not exist")
                 continue
             to_opens.append(to_open)
+        # if len(to_opens) != len(self._to_open):
+        #     print("Missing files:")
+        #     for missing in self._to_open:
+        #         if missing in to_opens:
+        #             continue
+        #         print(f"\t{missing}")
         subprocess.call([self._ide, '-n', '-w'] +
                         [self._new_dir.resolve() / to_open for
                          to_open in to_opens],
