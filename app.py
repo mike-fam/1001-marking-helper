@@ -92,6 +92,8 @@ def main():
         if args.ide:
             opening.join()
         opening_idle.join()
+        input(f"Finished marking {submission[':submitters'][0]}, press ENTER "
+              f"to continue")
         # running.join()
         
 

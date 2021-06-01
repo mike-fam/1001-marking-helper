@@ -81,13 +81,17 @@ how to use it.
             └── ...
 	```
 
-3. You can also see the file the students have submitted printed out in the shell.
+3. You can also see the file the students have submitted, and some other information
+   printed out in the shell.
+   ![Example output](https://i.imgur.com/fr7yOQn.png)
+   
+4. You can also see the output from [mikelint](https://github.com/mike-fam/mikelint).
 
-4. The assignment files are opened in your IDE if you supplied the `--ide` flag.
+5. The assignment files are opened in your IDE if you supplied the `--ide` flag.
 
-4. `a3.py` is also opened in IDLE. You can run the code here.
+6. `a3.py` is also opened in IDLE. You can run the code here.
 
-5. After you've done marking the assignment, close everything, including your IDE,
+7. After you've done marking the assignment, close everything, including your IDE,
    the gui and IDLE. The tool will wipe `temp_marking` and move on to the next student. 
 
 *Note:* I've tried to make this cross-platform, but I use this mostly on Windows and tested it on MacOS, so there might be some issues with other OSes.
