@@ -1,16 +1,17 @@
 from pathlib import Path
 import threading
 import argparse
+from datetime import datetime
 
-from helpers.linter.analysers import ClassInstanceAnalyser, DocstringAnalyser, \
-    EncapsulationAnalyser, NamingAnalyser, ScopeAnalyser, StructureAnalyser
-from helpers.linter.formatters import BaseFormatter
-from helpers.open_scripts import OpenScript
 import yaml
-from datetime import datetime, timezone
 import pytz
 
-from helpers.run_linter import Run
+from mikelint.analysers import ClassInstanceAnalyser, DocstringAnalyser, \
+    EncapsulationAnalyser, NamingAnalyser, ScopeAnalyser, StructureAnalyser
+from mikelint.formatters import BaseFormatter
+from mikelint import Run
+
+from helpers.open_scripts import OpenScript
 
 SUBMISSION_DIR = Path("submissions")
 SUPPORT_CODE_PATH = Path('assignment_stub')
